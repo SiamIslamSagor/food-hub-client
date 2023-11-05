@@ -44,7 +44,11 @@ const NavBar = () => {
         <NavLink
           to="/login"
           className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] hover:text-white bg-transparent hover:tw ${
-            location.pathname === "/" && "text-white"
+            location.pathname === "/" && window.scrollY <= 420
+              ? "text-white"
+              : location.pathname === "/" &&
+                window.scrollY >= 420 &&
+                "text-black"
           } hover:border`}
         >
           login
@@ -55,7 +59,9 @@ const NavBar = () => {
         <NavLink
           to="/register"
           className={`btn border-[#f86f03] bg-orange-500 outline-none  hover:border-[#f86f03] text-white  hover:bg-transparent hover:tw ${
-            location.pathname === "/" ? "text-white" : "hover:text-black"
+            location.pathname === "/" && window.scrollY <= 420
+              ? "text-white"
+              : "hover:text-black"
           } hover:border`}
         >
           Sign Up
@@ -73,7 +79,7 @@ const NavBar = () => {
           </div>
           <div className="">
             <div
-              className={`hidden xl:flex items-center gap-10 ${
+              className={`hidden xl:flex items-center gap-6 2xl:gap-10 ${
                 location.pathname === "/" && window.scrollY >= 420
                   ? "text-black"
                   : location.pathname === "/"

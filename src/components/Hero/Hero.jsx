@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 // import { AwesomeButton } from "react-awesome-button";
+import { Link } from "react-router-dom";
 import heroBg from "../../assets/images/FOODHubHero.png";
 import TypeWriter from "../TypeWriter/TypeWriter";
 
@@ -29,12 +30,6 @@ const Hero = () => {
       <div className="w-full h-full absolute bg-[#000000a1]">
         <div className="container mx-auto max-sm:mt-28 sm:mt-36 md:mt-72 lg:mt-96 text-white">
           <div className=" md:max-w-[60%] max-sm:px-2 sm:mx-4 lg:mx-6">
-            {/* <h1 className="max-sm:text-2xl sm:text-3xl sm:mb-4 max-sm:mb-3 max-sm:leading-7 tracking-tight  font-medium md:text-4xl">
-              hello <br />
-              hhjggjhghjgj <br />
-              hihfhhsjdfh <br />
-              hihfhhsjdfh
-            </h1> */}
             <TypeWriter
               staticText={staticText}
               staticTextColor={staticTextColor}
@@ -50,9 +45,13 @@ const Hero = () => {
               growing community, and let's serve up kindness, one meal at a
               time.
             </p>
-            <button className="btn max-sm:btn-sm btn-outline btn-warning font-bold">
-              Get Started
-            </button>
+            <Link to="/login">
+              <button
+                className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] text-white bg-transparent `}
+              >
+                Get Started
+              </button>
+            </Link>
           </div>
         </div>
       </div>
