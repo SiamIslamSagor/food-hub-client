@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import loginBgImg from "../../assets/images/footbg3.png";
 import LoginAnim from "./LoginAnim";
 import TypeWriter from "../TypeWriter/TypeWriter";
+import useContextData from "../../hooks/useContextData";
 
 const Login = () => {
+  // state
   const [passwordType, setPasswordType] = useState(true);
   const cardBg = {
     backgroundImage: `url(${loginBgImg})`,
@@ -16,22 +18,34 @@ const Login = () => {
     backgroundSize: "cover",
   };
 
+  // context data
+  const { logIn } = useContextData();
+
+  // handler
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email, password);
+
+    // sign in
+    logIn(email, password)
+      .then(res => {
+        console.log(res.user);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const staticText = "";
   const staticTextColor = "text-blue-500";
   const textArray = ["Log In Here!", "Sign In Here!"];
   const textArrayColor = "orange";
   const cursor = "|";
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.get.name.value;
-    const email = form.get.email.value;
-    const password = form.get.password.value;
-    const photoUrl = form.get.photoUrl.value;
-
-    console.log(name, email, password, photoUrl);
-  };
 
   return (
     <div className="container mx-auto my-auto flex items-center justify-between flex-row max-lg:flex-col">
@@ -49,7 +63,7 @@ const Login = () => {
             cursor={cursor}
           ></TypeWriter>
         </div>
-        <form className="p-4">
+        <form onSubmit={handleSubmit} className="p-4">
           <div className="relative">
             <label className="label">
               <span className="label-text font-medium">

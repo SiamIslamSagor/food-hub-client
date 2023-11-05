@@ -11,10 +11,21 @@ const NavBar = () => {
   const [navClass, setNavClass] = useState("");
 
   // context data
-  const { user } = useContextData();
+  const { user, logOut } = useContextData();
   // console.log(user);
 
   const location = useLocation();
+
+  // handler
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("log out");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   window.addEventListener("scroll", function () {
     if (window.scrollY >= 420) {
@@ -97,6 +108,22 @@ const NavBar = () => {
               }`}
             >
               {links}
+              {user && (
+                <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
+                  <button
+                    onClick={handleLogOut}
+                    className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] hover:text-white bg-transparent hover:tw ${
+                      location.pathname === "/" && window.scrollY <= 420
+                        ? "text-white"
+                        : location.pathname === "/" &&
+                          window.scrollY >= 420 &&
+                          "text-black"
+                    } hover:border`}
+                  >
+                    log Out
+                  </button>
+                </div>
+              )}
             </div>
             <div className="">
               <button
