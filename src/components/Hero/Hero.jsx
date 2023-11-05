@@ -46,9 +46,7 @@ const Hero = () => {
               time.
             </p>
             <Link to="/login">
-              <button
-                className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] text-white bg-transparent `}
-              >
+              <button className="btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] text-white bg-transparent">
                 Get Started
               </button>
             </Link>

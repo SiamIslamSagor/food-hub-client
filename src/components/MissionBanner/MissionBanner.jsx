@@ -46,9 +46,9 @@ const MissionBanner = () => {
             Add Product Now
           </button>{" "}
         </div>
-        <div className="flex-1">
+        <div className="flex-1 ">
           <img
-            className="rounded-md w-full lg:w-[580px]"
+            className="lg:ml-auto rounded-md w-full lg:w-[580px]"
             src="https://i.ibb.co/nsZx5fV/ass11-1.png"
             alt=""
           />

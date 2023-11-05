@@ -52,6 +52,14 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // go to top
+  const gooTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   // observer
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, presentUser => {
@@ -75,6 +83,7 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     logOut,
     updateUserData,
+    gooTop,
   };
 
   return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>;
