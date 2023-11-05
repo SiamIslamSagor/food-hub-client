@@ -22,6 +22,17 @@ const Login = () => {
   const textArrayColor = "orange";
   const cursor = "|";
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.get.name.value;
+    const email = form.get.email.value;
+    const password = form.get.password.value;
+    const photoUrl = form.get.photoUrl.value;
+
+    console.log(name, email, password, photoUrl);
+  };
+
   return (
     <div className="container mx-auto my-auto flex items-center justify-between flex-row max-lg:flex-col">
       <div
@@ -104,7 +115,7 @@ const Login = () => {
             </p>
           </div>
           <p className="my-2">or</p>
-          <button className="flex items-center gap-2  w-full max-w-[480px] mx-auto justify-center btn text-[#f86f03] bg-white border-none rounded-full hover:bg-[#f86f03] hover:text-white">
+          <button className="flex items-center gap-2  w-full max-w-[480px] mx-auto justify-center btn text-[#f86f03] bg-white border-none rounded-full hover:bg-[#f86f03] hover:text-white max-sm:w-[328px]">
             Log In With Google <BsGoogle></BsGoogle>
           </button>
         </div>
