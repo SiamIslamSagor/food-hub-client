@@ -3,10 +3,16 @@ import foodHubLogo from "../../assets/images/foodHubLogo.png";
 import "./NavBar.css";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
+import useContextData from "../../hooks/useContextData";
 
 const NavBar = () => {
+  // state
   const [mobileNavCall, setMobileNavCall] = useState(false);
   const [navClass, setNavClass] = useState("");
+
+  // context data
+  const { user } = useContextData();
+  // console.log(user);
 
   const location = useLocation();
 
@@ -40,33 +46,36 @@ const NavBar = () => {
         <NavLink to="/my_food_request">my food request</NavLink>
       </div>
 
-      <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
-        <NavLink
-          to="/login"
-          className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] hover:text-white bg-transparent hover:tw ${
-            location.pathname === "/" && window.scrollY <= 420
-              ? "text-white"
-              : location.pathname === "/" &&
-                window.scrollY >= 420 &&
-                "text-black"
-          } hover:border`}
-        >
-          login
-        </NavLink>
-      </div>
-
-      <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
-        <NavLink
-          to="/register"
-          className={`btn border-[#f86f03] bg-orange-500 outline-none  hover:border-[#f86f03] text-white  hover:bg-transparent hover:tw ${
-            location.pathname === "/" && window.scrollY <= 420
-              ? "text-white"
-              : "hover:text-black"
-          } hover:border`}
-        >
-          Sign Up
-        </NavLink>
-      </div>
+      {user === null && (
+        <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
+          <NavLink
+            to="/login"
+            className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] hover:text-white bg-transparent hover:tw ${
+              location.pathname === "/" && window.scrollY <= 420
+                ? "text-white"
+                : location.pathname === "/" &&
+                  window.scrollY >= 420 &&
+                  "text-black"
+            } hover:border`}
+          >
+            login
+          </NavLink>
+        </div>
+      )}
+      {user === null && (
+        <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
+          <NavLink
+            to="/register"
+            className={`btn border-[#f86f03] bg-orange-500 outline-none  hover:border-[#f86f03] text-white  hover:bg-transparent hover:tw ${
+              location.pathname === "/" && window.scrollY <= 420
+                ? "text-white"
+                : "hover:text-black"
+            } hover:border`}
+          >
+            Sign Up
+          </NavLink>
+        </div>
+      )}
     </>
   );
 

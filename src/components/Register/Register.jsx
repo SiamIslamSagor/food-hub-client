@@ -8,10 +8,16 @@ import registerBgImg from "../../assets/images/footerBg.png";
 import "./register.css";
 import RegisterAnim from "./RegisterAnim";
 import TypeWriter from "../TypeWriter/TypeWriter";
+import useContextData from "../../hooks/useContextData";
 
 const Register = () => {
+  // state
   const [passwordType, setPasswordType] = useState(true);
 
+  // context data
+  const { createUser, user } = useContextData();
+
+  // click handler
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
@@ -21,6 +27,15 @@ const Register = () => {
     const photoUrl = form.photoUrl.value;
 
     console.log(name, email, password, photoUrl);
+
+    // crete user account
+    createUser(email, password)
+      .then(res => {
+        console.log(res.user);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   const cardBg = {

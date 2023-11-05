@@ -1,19 +1,21 @@
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import PropTypes from "prop-types";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import auth from "../config/firebase.config";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   // state
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(null);
   const [cooking, setCooking] = useState(true);
 
@@ -50,8 +52,20 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // observer
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, presentUser => {
+      setUser(presentUser);
+      console.log("USER OBSERVED ::>>", presentUser);
+      setCooking(false);
+    });
+    return () => {
+      return unSubscribe();
+    };
+  });
+
   const data = {
-    user: "moksed ali",
+    user,
     setLoading,
     loading,
     setCooking,
