@@ -12,8 +12,6 @@ const TypeWriter = ({
     <div>
       <h1
         className={`
-        
-
         max-sm:text-2xl text-left h-[100px] sm:text-3xl sm:mb-4 max-sm:mb-3 max-sm:leading-7 tracking-tight  font-medium md:text-4xl lg:text-5xl
 
         ${staticTextColorTailwind}`}
