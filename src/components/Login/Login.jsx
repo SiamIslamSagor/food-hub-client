@@ -29,7 +29,7 @@ const Login = () => {
         className=" flex-1 rounded-xl max-sm:w-[360px] sm:w-full mx-[20px] max-w-lg bg-blue-200 py-10"
       >
         {/* <h2 className="text-center text-4xl font-bold">Login</h2> */}
-        <div className=" flex items-center justify-center">
+        <div className=" flex items-center justify-center -mb-10">
           <TypeWriter
             staticText={staticText}
             staticTextColor={staticTextColor}

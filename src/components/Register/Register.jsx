@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AwesomeButton } from "react-awesome-button";
 import { AiFillEye, AiFillEyeInvisible, AiFillPicture } from "react-icons/ai";
 import { CgMail } from "react-icons/cg";
 import { BsGoogle } from "react-icons/bs";
@@ -8,6 +7,7 @@ import { Link } from "react-router-dom";
 import registerBgImg from "../../assets/images/footerBg.png";
 import "./register.css";
 import RegisterAnim from "./RegisterAnim";
+import TypeWriter from "../TypeWriter/TypeWriter";
 
 const Register = () => {
   const cardBg = {
@@ -17,6 +17,12 @@ const Register = () => {
     backgroundSize: "cover",
   };
 
+  const staticText = "";
+  const staticTextColor = "text-blue-500";
+  const textArray = ["Register Here!", "Sign Up Here!"];
+  const textArrayColor = "orange";
+  const cursor = "|";
+
   const [passwordType, setPasswordType] = useState(true);
   return (
     <div className="container mx-auto my-auto flex items-center justify-between flex-row-reverse max-lg:flex-col">
@@ -25,7 +31,15 @@ const Register = () => {
         className="flex-1  rounded-xl max-sm:w-[360px] sm:w-full mx-[20px] max-w-lg bg-[#CDF5FD] py-10
       "
       >
-        <h2 className="text-center text-4xl font-bold">Register</h2>
+        <div className=" flex items-center justify-center -mb-10">
+          <TypeWriter
+            staticText={staticText}
+            staticTextColor={staticTextColor}
+            textArray={textArray}
+            textArrayColor={textArrayColor}
+            cursor={cursor}
+          ></TypeWriter>
+        </div>
         <form className="p-4">
           <div className="relative">
             <label className="label">
@@ -120,7 +134,7 @@ const Register = () => {
           </div>
           <p className="my-2">or</p>
           <button className="flex items-center gap-2  w-full max-w-[480px] mx-auto justify-center btn text-[#f86f03] bg-white border-none rounded-full hover:bg-[#f86f03] hover:text-white">
-            Log In With Google <BsGoogle></BsGoogle>
+            <BsGoogle></BsGoogle> Sign Up With Google
           </button>
         </div>
       </div>
