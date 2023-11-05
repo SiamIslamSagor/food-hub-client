@@ -16,7 +16,7 @@ const Register = () => {
   const [passwordType, setPasswordType] = useState(true);
 
   // context data
-  const { createUser, user } = useContextData();
+  const { createUser, user, updateUserData } = useContextData();
 
   // click handler
   const handleSubmit = e => {
@@ -37,6 +37,14 @@ const Register = () => {
     createUser(email, password)
       .then(res => {
         console.log(res.user);
+        // update user data
+        updateUserData(name, photoUrl)
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          });
         toast.success("Account created successfully.", { id: toastId });
       })
       .catch(err => {

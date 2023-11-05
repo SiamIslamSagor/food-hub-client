@@ -3,6 +3,7 @@ import Root from "../layout/Root";
 import Home from "../page/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,30 @@ const router = createBrowserRouter([
       {
         path: "available_foods",
         element: <p>Available Foods</p>,
+      },
+      {
+        path: "add_food",
+        element: (
+          <PrivetRoute>
+            <p>add Foods</p>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "manage_my_foods",
+        element: (
+          <PrivetRoute>
+            <p>manage Foods</p>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "my_food_request",
+        element: (
+          <PrivetRoute>
+            <p>food request</p>
+          </PrivetRoute>
+        ),
       },
       {
         path: "login",

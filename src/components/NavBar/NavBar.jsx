@@ -54,7 +54,7 @@ const NavBar = () => {
       </div>
 
       <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
-        <NavLink to="/manage_food">Manage food</NavLink>
+        <NavLink to="/manage_my_foods">Manage food</NavLink>
       </div>
 
       <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
