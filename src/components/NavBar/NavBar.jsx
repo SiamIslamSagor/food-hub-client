@@ -4,6 +4,7 @@ import "./NavBar.css";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import useContextData from "../../hooks/useContextData";
+import toast, { Toaster } from "react-hot-toast";
 
 const NavBar = () => {
   // state
@@ -18,9 +19,12 @@ const NavBar = () => {
 
   // handler
   const handleLogOut = () => {
+    const toastId = toast.loading("processing...");
+
     logOut()
       .then(() => {
         console.log("log out");
+        toast.success("Log Out successfully.", { id: toastId });
       })
       .catch(err => {
         console.log(err);
@@ -92,6 +96,7 @@ const NavBar = () => {
 
   return (
     <div className=" sticky top-0 z-10 duration-700">
+      <Toaster></Toaster>
       <div className={`  duration-700 ${navClass}`}>
         <div className="py-5 container mx-auto flex justify-between items-center">
           <div className="">

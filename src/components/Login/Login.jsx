@@ -7,6 +7,7 @@ import loginBgImg from "../../assets/images/footbg3.png";
 import LoginAnim from "./LoginAnim";
 import TypeWriter from "../TypeWriter/TypeWriter";
 import useContextData from "../../hooks/useContextData";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   // state
@@ -24,6 +25,8 @@ const Login = () => {
   // handler
 
   const handleSubmit = e => {
+    const toastId = toast.loading("processing...");
+
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -35,6 +38,7 @@ const Login = () => {
     logIn(email, password)
       .then(res => {
         console.log(res.user);
+        toast.success("Sign In successfully.", { id: toastId });
       })
       .catch(err => {
         console.log(err);
@@ -49,11 +53,11 @@ const Login = () => {
 
   return (
     <div className="container mx-auto my-auto flex items-center justify-between flex-row max-lg:flex-col">
+      <Toaster></Toaster>
       <div
         style={cardBg}
         className=" flex-1 rounded-xl max-sm:w-[360px] sm:w-full mx-[20px] max-w-lg bg-blue-200 py-10"
       >
-        {/* <h2 className="text-center text-4xl font-bold">Login</h2> */}
         <div className=" flex items-center justify-center -mb-10">
           <TypeWriter
             staticText={staticText}
