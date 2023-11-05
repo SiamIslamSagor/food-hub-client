@@ -9,6 +9,7 @@ import "./register.css";
 import RegisterAnim from "./RegisterAnim";
 import TypeWriter from "../TypeWriter/TypeWriter";
 import useContextData from "../../hooks/useContextData";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   // state
@@ -19,6 +20,10 @@ const Register = () => {
 
   // click handler
   const handleSubmit = e => {
+    // pending toast
+    const toastId = toast.loading("processing...");
+
+    // form data
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -32,6 +37,7 @@ const Register = () => {
     createUser(email, password)
       .then(res => {
         console.log(res.user);
+        toast.success("Account created successfully.", { id: toastId });
       })
       .catch(err => {
         console.log(err);
@@ -53,6 +59,7 @@ const Register = () => {
 
   return (
     <div className="container mx-auto my-auto flex items-center justify-between flex-row-reverse max-lg:flex-col">
+      <Toaster></Toaster>
       <div
         style={cardBg}
         className="flex-1  rounded-xl max-sm:w-[360px] sm:w-full mx-[20px] max-w-lg bg-[#CDF5FD] py-10
