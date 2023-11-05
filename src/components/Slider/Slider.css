@@ -7,8 +7,6 @@
   text-align: center;
   font-size: 18px;
   background: #fff;
-
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,38 +19,24 @@
   object-fit: cover;
 }
 
-/* 
-.swiper-button-next,
-.swiper-button-prev {
-    background-color: white;
-    background-color: rgba(255, 255, 255, 0.5);
-    right:10px;
-    padding: 30px;
-    color: #000 !important;
-    fill: black !important;
-    stroke: black !important;
-} */
-
 .swiper-button-next {
+  padding: 20px;
+  padding-block: 28px;
+  right: 10px;
   background-color: white;
   background-color: rgba(255, 255, 255, 0.189);
-  right: 10px;
-  padding: 20px;
-  color: #ffffff !important;
   fill: black !important;
+  color: #ffffff !important;
   stroke: black !important;
 }
 
 .swiper-button-prev {
+  padding: 20px;
+  padding-block: 28px;
+  left: 10px;
   background-color: white;
   background-color: rgba(255, 255, 255, 0.189);
-  left: 10px;
-  padding: 20px;
   stroke: black !important;
   color: #ffffff !important;
   fill: black !important;
 }
-
-/* .swiper-button-next:hover {
-  right: 20px;
-} */

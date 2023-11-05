@@ -23,9 +23,9 @@ const TypeWriter = ({
             loop={0}
             cursor
             cursorStyle={`${cursor}`}
-            typeSpeed={80}
-            deleteSpeed={100}
-            delaySpeed={1000}
+            typeSpeed={90}
+            deleteSpeed={30}
+            delaySpeed={3000}
           />
         </span>
       </h1>
