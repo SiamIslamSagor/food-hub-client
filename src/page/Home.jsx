@@ -13,7 +13,7 @@ const Home = () => {
     <div className="">
       <Hero></Hero>
       {/* <div className="h-40"></div> */}
-      {/* <Slider></Slider> */}
+      <Slider></Slider>
       <MissionBanner></MissionBanner>
     </div>
   );
