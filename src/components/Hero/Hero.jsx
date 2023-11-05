@@ -50,7 +50,9 @@ const Hero = () => {
               growing community, and let's serve up kindness, one meal at a
               time.
             </p>
-            <button className="btn max-sm:btn-sm">Get Started</button>
+            <button className="btn max-sm:btn-sm btn-outline btn-warning font-bold">
+              Get Started
+            </button>
           </div>
         </div>
       </div>

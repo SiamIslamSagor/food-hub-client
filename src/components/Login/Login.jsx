@@ -73,27 +73,25 @@ const Login = () => {
             </a>
           </div>
           <div className="form-control mt-6">
-            <AwesomeButton key={"skjfdlksj"} type="secondary">
+            <button className="btn bg-[#f86f03] text-white border-none rounded-full hover:bg-white hover:text-[#f86f03]">
               Log In
-            </AwesomeButton>
+            </button>
           </div>
         </form>
-        <div>
-          <p className="text-lg font-medium text-gray-700">
-            Don&apos;t have an account?{" "}
-            <Link className="text-blue-600 link link-hover" to="/register">
-              Register
-            </Link>
-          </p>
+        <div className="text-center">
+          <div>
+            <p className="text-lg font-medium text-gray-700">
+              Don&apos;t have an account?{" "}
+              <Link className="text-blue-600 link link-hover" to="/register">
+                Register
+              </Link>
+            </p>
+          </div>
+          <p className="my-2">or</p>
+          <button className="flex items-center gap-2  w-full max-w-[480px] mx-auto justify-center btn text-[#f86f03] bg-white border-none rounded-full hover:bg-[#f86f03] hover:text-white">
+            Log In With Google <BsGoogle></BsGoogle>
+          </button>
         </div>
-        <p className="my-2">or</p>
-        <AwesomeButton
-          key={"sdflskiiuiuiu"}
-          before={<BsGoogle className="text-3xl pr-3"></BsGoogle>}
-          type="primary"
-        >
-          Log In With Google
-        </AwesomeButton>
       </div>
       <div className="anim-div">
         <LoginAnim></LoginAnim>
