@@ -1,3 +1,4 @@
+import FeaturesFoods from "../components/FeaturesFoods/FeaturesFoods";
 import Hero from "../components/Hero/Hero";
 import MissionBanner from "../components/MissionBanner/MissionBanner";
 import Slider from "../components/Slider/Slider";
@@ -12,9 +13,10 @@ const Home = () => {
   return (
     <div className="">
       <Hero></Hero>
+      {/* <FeaturesFoods></FeaturesFoods> */}
       {/* <div className="h-40"></div> */}
-      <Slider></Slider>
-      <MissionBanner></MissionBanner>
+      {/* <Slider></Slider> */}
+      {/* <MissionBanner></MissionBanner> */}
     </div>
   );
 };

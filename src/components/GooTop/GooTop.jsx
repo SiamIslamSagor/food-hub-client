@@ -6,11 +6,9 @@ const GooTop = () => {
   const { gooTop } = useContextData();
 
   return (
-    <div className="container mx-auto my-10 text-right">
-      <button onClick={gooTop} className={`btn my-4 sticky top-[90vh]`}>
-        <BsArrowUpCircle className="text-lg"></BsArrowUpCircle> Goo Top
-      </button>
-    </div>
+    <button onClick={gooTop} className={`btn btn-sm`}>
+      <BsArrowUpCircle className="text-lg"></BsArrowUpCircle> Goo Top
+    </button>
   );
 };
 
