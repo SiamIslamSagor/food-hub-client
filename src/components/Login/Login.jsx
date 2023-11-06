@@ -49,8 +49,8 @@ const Login = () => {
         form.reset();
         navigate(location.state ? location.state : "/");
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        toast.error("Invalid email or password.", { id: toastId });
       });
   };
 

@@ -4,11 +4,13 @@ import Home from "../page/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import PrivetRoute from "./PrivetRoute";
+import ErrorPage from "../page/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
