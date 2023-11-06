@@ -168,7 +168,7 @@ const NavBar = () => {
                   ? "text-black"
                   : location.pathname === "/"
                   ? "text-white"
-                  : "text-black"
+                  : "text-[#f86f03]"
               }`}
             >
               {links}
