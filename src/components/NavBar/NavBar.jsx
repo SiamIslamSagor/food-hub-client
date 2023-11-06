@@ -232,30 +232,34 @@ const NavBar = () => {
                 </svg>
               </label>
 
-              <div className={`dropdown dropdown-end ${dropdownStyle}`}>
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
-                    <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais" />
-                  </div>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <a className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>Settings</a>
-                  </li>
-                  <li>
-                    <a>Logout</a>
-                  </li>
-                </ul>
-              </div>
+              {user && (
+                <div className={`dropdown dropdown-end ${dropdownStyle}`}>
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais" />
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="mt-6 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <p className="mx-auto">{user?.displayName}</p>
+                    </li>
+                    <li>
+                      <p className="mx-auto">{user?.email}</p>
+                    </li>
+                    <li>
+                      <button className="btn btn-sm" onClick={handleLogOut}>
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
 
             <div className=" xl:hidden space-x-2">
@@ -303,30 +307,34 @@ const NavBar = () => {
                 </svg>
               </label>
 
-              <div className={`dropdown dropdown-end tew ${dropdownStyle}`}>
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
-                    <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais" />
-                  </div>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <a className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>Settings</a>
-                  </li>
-                  <li>
-                    <a>Logout</a>
-                  </li>
-                </ul>
-              </div>
+              {user && (
+                <div className={`dropdown dropdown-end tew ${dropdownStyle}`}>
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?size=626&ext=jpg&ga=GA1.1.1880011253.1699142400&semt=ais" />
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="mt-6 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <p className="mx-auto">{user?.displayName}</p>
+                    </li>
+                    <li>
+                      <p className="mx-auto">{user?.email}</p>
+                    </li>
+                    <li>
+                      <button className="btn btn-sm" onClick={handleLogOut}>
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
