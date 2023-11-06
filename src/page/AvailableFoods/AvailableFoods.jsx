@@ -11,8 +11,8 @@ const AvailableFoods = () => {
   // foods data
   const { data: loadedData, isLoading } = useFeaturedFoods();
   //state
-  console.log(loadedData);
   const [filteredData, setFilteredData] = useState([]);
+  const [typedText, setTypedText] = useState("");
   const [isSorted, setIsSorted] = useState(false);
 
   // handler
@@ -22,6 +22,26 @@ const AvailableFoods = () => {
     );
     setFilteredData(sorted);
     setIsSorted(!isSorted);
+  };
+
+  // key press handler
+  const handleKeyPress = e => {
+    //  if press enter key then call search function
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  // search function
+  const handleSearch = () => {
+    const searchText = typedText;
+    // console.log(filteredData);
+    const searchResult = loadedData?.filter(food =>
+      food.foodName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
+    );
+    setFilteredData(searchResult);
+    console.log("result", searchResult);
+    console.log("search text", searchText);
   };
 
   useEffect(() => {
@@ -39,8 +59,14 @@ const AvailableFoods = () => {
             type="text"
             placeholder="Search Food Name Here"
             className="input input-bordered input-md w-full max-w-xs md:max-w-md"
+            value={typedText}
+            onChange={e => setTypedText(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
-          <button className=" absolute right-5 bg-transparent">
+          <button
+            onClick={handleSearch}
+            className=" absolute right-5 bg-transparent"
+          >
             <FiSearch className="text-3xl hover:text-[28px] duration-75"></FiSearch>
           </button>
         </div>
