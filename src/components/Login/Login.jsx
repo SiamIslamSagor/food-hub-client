@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { CgMail } from "react-icons/cg";
 import { BsGoogle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginBgImg from "../../assets/images/footbg3.png";
 import LoginAnim from "./LoginAnim";
 import TypeWriter from "../TypeWriter/TypeWriter";
@@ -12,6 +12,11 @@ import toast, { Toaster } from "react-hot-toast";
 const Login = () => {
   // state
   const [passwordType, setPasswordType] = useState(true);
+
+  // navigate prev page
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const cardBg = {
     backgroundImage: `url(${loginBgImg})`,
     backgroundPosition: "center",
@@ -20,10 +25,11 @@ const Login = () => {
   };
 
   // context data
-  const { logIn } = useContextData();
+  const { logIn, setLoading, loading, googleLogin } = useContextData();
 
   // handler
 
+  // form handler
   const handleSubmit = e => {
     const toastId = toast.loading("processing...");
 
@@ -37,11 +43,30 @@ const Login = () => {
     // sign in
     logIn(email, password)
       .then(res => {
+        setLoading(!loading);
         console.log(res.user);
         toast.success("Sign In successfully.", { id: toastId });
+        form.reset();
+        navigate(location.state ? location.state : "/");
       })
       .catch(err => {
         console.log(err);
+      });
+  };
+
+  // google handler
+  const handleGoogleSignIn = () => {
+    const toastId = toast.loading("processing...");
+
+    googleLogin()
+      .then(res => {
+        setLoading(!loading);
+        console.log(res.user);
+        toast.success("Sign In successfully.", { id: toastId });
+        navigate(location.state ? location.state : "/");
+      })
+      .catch(() => {
+        toast.error("Sign In Failed.", { id: toastId });
       });
   };
 
@@ -133,7 +158,10 @@ const Login = () => {
             </p>
           </div>
           <p className="my-2">or</p>
-          <button className="flex items-center gap-2  w-full max-w-[480px] mx-auto justify-center btn text-[#f86f03] bg-white border-none rounded-full hover:bg-[#f86f03] hover:text-white max-sm:w-[328px]">
+          <button
+            onClick={handleGoogleSignIn}
+            className="flex items-center gap-2  w-full max-w-[480px] mx-auto justify-center btn text-[#f86f03] bg-white border-none rounded-full hover:bg-[#f86f03] hover:text-white max-sm:w-[328px]"
+          >
             Log In With Google <BsGoogle></BsGoogle>
           </button>
         </div>

@@ -16,7 +16,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   // state
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [cooking, setCooking] = useState(true);
 
   ////
@@ -70,7 +70,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       return unSubscribe();
     };
-  });
+  }, [loading]);
 
   const data = {
     user,
