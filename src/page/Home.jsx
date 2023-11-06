@@ -7,7 +7,7 @@ const Home = () => {
   // context data
   const { gooTop } = useContextData();
 
-  gooTop();
+  // gooTop();
 
   return (
     <div className="">
