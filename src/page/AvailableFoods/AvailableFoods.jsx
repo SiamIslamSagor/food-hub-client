@@ -4,8 +4,11 @@ import NoFood from "../../components/Lodder/NoFood";
 import Title from "../../components/Title/Title";
 import useFeaturedFoods from "../../hooks/useFeaturedFoods";
 import { FiSearch } from "react-icons/fi";
-import { FaSortNumericUp } from "react-icons/fa";
+import { FaSortNumericDownAlt, FaSortNumericUp } from "react-icons/fa";
+import { BiBorderAll } from "react-icons/bi";
+import { FiFilter } from "react-icons/fi";
 import { useEffect, useState } from "react";
+import "./AvailableFoods.css";
 
 const AvailableFoods = () => {
   // foods data
@@ -14,11 +17,20 @@ const AvailableFoods = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [typedText, setTypedText] = useState("");
   const [isSorted, setIsSorted] = useState(false);
+  const [foodAvailable, setFoodAvailable] = useState(false);
 
   // handler
-  const handleSortByDate = () => {
+  const handleSortByDateMin = () => {
     const sorted = filteredData?.sort(
       (a, b) => new Date(a.expiredDate) - new Date(b.expiredDate)
+    );
+    setFilteredData(sorted);
+    setIsSorted(!isSorted);
+  };
+
+  const handleSortByDateMax = () => {
+    const sorted = filteredData?.sort(
+      (a, b) => new Date(b.expiredDate) - new Date(a.expiredDate)
     );
     setFilteredData(sorted);
     setIsSorted(!isSorted);
@@ -39,9 +51,12 @@ const AvailableFoods = () => {
     const searchResult = loadedData?.filter(food =>
       food.foodName.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
     );
-    setFilteredData(searchResult);
-    console.log("result", searchResult);
-    console.log("search text", searchText);
+    if (searchResult.length === 0) {
+      return setFoodAvailable(true);
+    } else {
+      setFilteredData(searchResult);
+      setFoodAvailable(false);
+    }
   };
 
   useEffect(() => {
@@ -70,21 +85,49 @@ const AvailableFoods = () => {
             <FiSearch className="text-3xl hover:text-[28px] duration-75"></FiSearch>
           </button>
         </div>
-        <button
-          onClick={handleSortByDate}
-          className={`-mt-8 max-md:mb-10 mb-16 btn px-8 hover:text-[#f86f03] bg-orange-500 outline-none  hover:border-[#f86f03] text-white  hover:bg-transparent hover: hover:border`}
-        >
-          Sort By Expired Date <FaSortNumericUp></FaSortNumericUp>
-        </button>
-        {/* <button>Sort By expired Date</button> */}
+        <div className="dropdown -mt-8 max-md:mb-10 mb-16 ">
+          <label
+            tabIndex={0}
+            className="btn m-1 hover:text-[#f86f03] bg-orange-500 outline-none  hover:border-[#f86f03] text-white  hover:bg-transparent hover: hover:border"
+          >
+            Filter <FiFilter></FiFilter>
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a onClick={() => setFilteredData(loadedData)}>
+                <BiBorderAll className="text-xl mb-2"></BiBorderAll> Show All
+              </a>
+            </li>
+            <li>
+              <a onClick={handleSortByDateMin}>
+                <FaSortNumericUp className="text-xl mb-2"></FaSortNumericUp>{" "}
+                Sort By Lowest to Highest Expired Date
+              </a>
+            </li>
+            <li>
+              <a onClick={handleSortByDateMax}>
+                <FaSortNumericDownAlt className="text-xl mb-2"></FaSortNumericDownAlt>{" "}
+                Sort By Highest to Lowest Expired Date
+              </a>
+            </li>
+          </ul>
+        </div>{" "}
       </div>
-      {/* <NoFood></NoFood> */}
-      {isLoading && <Loader></Loader>}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10">
-        {filteredData?.map(food => (
-          <FeaturesFoodsCard key={food._id} food={food}></FeaturesFoodsCard>
-        ))}
-      </div>
+      {foodAvailable ? (
+        <NoFood></NoFood>
+      ) : (
+        <div>
+          {isLoading && <Loader></Loader>}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-10">
+            {filteredData?.map(food => (
+              <FeaturesFoodsCard key={food._id} food={food}></FeaturesFoodsCard>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
