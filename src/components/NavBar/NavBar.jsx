@@ -194,11 +194,8 @@ const NavBar = () => {
                   onClick={handleThemeToggle}
                   className="hidden"
                   type="checkbox"
-                  // value={true}
-                  // checked={false}
                   checked={themeButtonStyle}
                   readOnly
-                  // defaultChecked={false}
                 />
 
                 {/* sun icon */}
@@ -278,7 +275,7 @@ const NavBar = () => {
 
                 {/* sun icon */}
                 <svg
-                  className={`text-black swap-on fill-current w-10 h-10 ${
+                  className={`text-black swap-on fill-current w-7 h-7 md:w-10 md:h-10 ${
                     location.pathname === "/" && window.scrollY >= 420
                       ? "text-black"
                       : location.pathname === "/"

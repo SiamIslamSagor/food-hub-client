@@ -37,7 +37,7 @@ const Hero = () => {
               textArrayColor={textArrayColor}
               cursor={cursor}
             ></TypeWriter>
-            <p className="mb-8 leading-4 font-normal md:text-xl md:font-medium">
+            <p className="mb-6 leading-4 font-normal md:text-xl md:font-medium">
               Welcome to FoodHub, where we turn surplus into smiles. We're on a
               mission to create a world where no one goes to bed hungry. Our
               platform connects the generous hearts of Bangladesh, making it

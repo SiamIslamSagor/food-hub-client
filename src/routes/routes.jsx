@@ -5,6 +5,7 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import PrivetRoute from "./PrivetRoute";
 import ErrorPage from "../page/ErrorPage";
+import AvailableFoods from "../page/AvailableFoods/AvailableFoods";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "available_foods",
-        element: <p>Available Foods</p>,
+        element: <AvailableFoods></AvailableFoods>,
       },
       {
         path: "add_food",

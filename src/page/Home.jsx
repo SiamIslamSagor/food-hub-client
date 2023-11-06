@@ -1,5 +1,6 @@
 import FeaturesFoods from "../components/FeaturesFoods/FeaturesFoods";
 import Hero from "../components/Hero/Hero";
+import Loader from "../components/Lodder/Loader";
 import MissionBanner from "../components/MissionBanner/MissionBanner";
 import Slider from "../components/Slider/Slider";
 import useContextData from "../hooks/useContextData";
@@ -13,7 +14,8 @@ const Home = () => {
   return (
     <div className="">
       <Hero></Hero>
-      {/* <FeaturesFoods></FeaturesFoods> */}
+      {/* <Loader></Loader> */}
+      <FeaturesFoods></FeaturesFoods>
       {/* <div className="h-40"></div> */}
       {/* <Slider></Slider> */}
       {/* <MissionBanner></MissionBanner> */}
