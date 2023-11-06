@@ -73,7 +73,7 @@ const AvailableFoods = () => {
           <input
             type="text"
             placeholder="Search Food Name Here"
-            className="input input-bordered input-md w-full max-w-xs md:max-w-md"
+            className="input text-lg input-bordered input-md w-full max-w-xs md:max-w-md"
             value={typedText}
             onChange={e => setTypedText(e.target.value)}
             onKeyDown={handleKeyPress}
@@ -97,19 +97,19 @@ const AvailableFoods = () => {
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a onClick={() => setFilteredData(loadedData)}>
-                <BiBorderAll className="text-xl mb-2"></BiBorderAll> Show All
+              <a className="mb-2" onClick={() => setFilteredData(loadedData)}>
+                <BiBorderAll className="text-xl"></BiBorderAll> Show All
               </a>
             </li>
             <li>
-              <a onClick={handleSortByDateMin}>
-                <FaSortNumericUp className="text-xl mb-2"></FaSortNumericUp>{" "}
-                Sort By Lowest to Highest Expired Date
+              <a className="mb-2" onClick={handleSortByDateMin}>
+                <FaSortNumericUp className="text-xl"></FaSortNumericUp> Sort By
+                Lowest to Highest Expired Date
               </a>
             </li>
             <li>
-              <a onClick={handleSortByDateMax}>
-                <FaSortNumericDownAlt className="text-xl mb-2"></FaSortNumericDownAlt>{" "}
+              <a className="mb-2" onClick={handleSortByDateMax}>
+                <FaSortNumericDownAlt className="text-xl"></FaSortNumericDownAlt>{" "}
                 Sort By Highest to Lowest Expired Date
               </a>
             </li>

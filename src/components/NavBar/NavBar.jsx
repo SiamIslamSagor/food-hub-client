@@ -176,7 +176,7 @@ const NavBar = () => {
                 <div className="uppercase nav-div max-md:w-full md:text-lg font-semibold">
                   <button
                     onClick={handleLogOut}
-                    className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] hover:text-white bg-transparent hover:tw ${
+                    className={`btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] hover:text-white bg-transparent  ${
                       location.pathname === "/" && window.scrollY <= 420
                         ? "text-white"
                         : location.pathname === "/" &&

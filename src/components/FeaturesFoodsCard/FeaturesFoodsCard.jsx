@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { TfiInfoAlt } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 const FeaturesFoodsCard = ({ food }) => {
   const {
     _id,
@@ -16,7 +17,7 @@ const FeaturesFoodsCard = ({ food }) => {
   } = food;
 
   return (
-    <div className="card max-lg:max-w-96 max-xl:card-compact bg-base-100 shadow-xl">
+    <div className="glass card max-lg:max-w-96 max-xl:card-compact bg-base-100 shadow-xl">
       <figure>
         <img
           className="xl:w-[400px] w-[366px] h-64"
@@ -47,9 +48,11 @@ const FeaturesFoodsCard = ({ food }) => {
           <h4 className="text-xl">{donarName}</h4>
         </div>
         <div className="card-actions justify-end">
-          <button className="btn border-[#f86f03] hover:bg-orange-500 outline-none  text-[#f86f03] hover:text-white bg-transparent  max-lg: max-xl:btn-sm">
-            View Details
-          </button>
+          <Link to={`/food/${_id}`}>
+            <button className="btn border-[#f86f03] hover:bg-orange-500 outline-none  text-[#f86f03] hover:text-white bg-transparent  max-lg: max-xl:btn-sm">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

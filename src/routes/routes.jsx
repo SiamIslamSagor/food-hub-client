@@ -6,6 +6,7 @@ import Register from "../components/Register/Register";
 import PrivetRoute from "./PrivetRoute";
 import ErrorPage from "../page/ErrorPage";
 import AvailableFoods from "../page/AvailableFoods/AvailableFoods";
+import FoodDetails from "../page/FoodDetails";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,12 @@ const router = createBrowserRouter([
       {
         path: "available_foods",
         element: <AvailableFoods></AvailableFoods>,
+      },
+      {
+        path: "food/:id",
+        element: <FoodDetails></FoodDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/food/${params.id}`),
       },
       {
         path: "add_food",
