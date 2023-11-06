@@ -41,7 +41,7 @@ const MissionBanner = () => {
             hungry.
           </p>
           <button
-            className={`btn text-[#f86f03] bg-white outline-none  hover:border-[#f86f03] max-sm:btn-sm mt-8 mb-4`}
+            className={`btn text-[#f86f03] bg-white outline-none  border-none max-sm:btn-sm mt-8 mb-4`}
           >
             Add Product Now
           </button>{" "}
