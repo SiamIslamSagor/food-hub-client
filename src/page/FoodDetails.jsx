@@ -4,14 +4,20 @@ import Title from "../components/Title/Title";
 import { BsArrowRightCircle, BsInfoCircle } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 import { GoGitPullRequest } from "react-icons/go";
-import { Button } from "flowbite-react";
 import useContextData from "../hooks/useContextData";
+import { useRef } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const FoodDetails = () => {
   // context data
   const { user } = useContextData();
   // single food data form loader
   const food = useLoaderData();
+
+  /// ref
+  const additionalNotesRef = useRef();
+  const donationMonyRef = useRef();
 
   const {
     _id,
@@ -29,8 +35,48 @@ const FoodDetails = () => {
   console.log(food);
 
   const handleSubmit = e => {
+    const toastId = toast.loading("processing...");
+
     e.preventDefault();
-    user.email;
+    // get current date
+    const currentDate = new Date();
+    // get day, month and year
+    const year = currentDate.getFullYear().toString();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const day = currentDate.getDay().toString();
+    // current request date
+    const requestDate = `${year}-${month}-${day}`;
+    // const requestedAdditional
+    const requestedFoodInfo = {
+      id: _id,
+      foodImg,
+      foodName,
+      foodQuantity,
+      foodStatus,
+      pickupLocation,
+      expiredDate,
+      requestDate,
+      donarImg,
+      donarName,
+      donarEmail,
+      additionalNotes: additionalNotesRef.current.value || "Not Given",
+      donationMony: donationMonyRef.current.value || "Not Given",
+      requesterName: user?.displayName || "Not Given",
+      requesterEmail: user?.email || "Not Given",
+      requesterImage: user?.photoURL || "Not Given",
+    };
+    console.log(requestedFoodInfo);
+    // send in server side
+    axios
+      .post("http://localhost:5000/requestCollection", requestedFoodInfo, {
+        withCredentials: true,
+      })
+      .then(() => {
+        toast.success("Request successfully.", { id: toastId });
+      })
+      .catch(() => {
+        toast.error("Request Failed.", { id: toastId });
+      });
   };
 
   return (
@@ -228,6 +274,8 @@ const FoodDetails = () => {
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 pr-8 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 relative"
                   type="text"
+                  ref={additionalNotesRef}
+                  name="additionalNotes"
                   placeholder="Additional Notes"
                   defaultValue={additionalNotes}
                 />
@@ -240,6 +288,8 @@ const FoodDetails = () => {
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 pr-8 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 relative"
                   type="text"
+                  ref={donationMonyRef}
+                  name="donationMony"
                   placeholder="Donation Mony"
                 />
                 <FiEdit2 className="absolute bottom-[125px] right-8 text-lg"></FiEdit2>
