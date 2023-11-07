@@ -1,10 +1,25 @@
-import { BsDatabaseAdd } from "react-icons/bs";
+import { MdOutlineUpdate } from "react-icons/md";
 import Title from "../components/Title/Title";
 import useContextData from "../hooks/useContextData";
+import { useEffect, useState } from "react";
+import { getClickFoodIdInLs } from "../utils/localStorage";
+import axios from "axios";
 
 const UpdateFood = () => {
   // context data
   const { user } = useContextData();
+
+  //   state
+  const [updateFood, setUpdateFood] = useState("");
+  const {
+    foodImg,
+    foodName,
+    foodQuantity,
+    expiredDate,
+    additionalNotes,
+    pickupLocation,
+  } = updateFood;
+
   const handleSubmit = e => {
     // const toastId = toast.loading("processing...");
 
@@ -46,6 +61,22 @@ const UpdateFood = () => {
       }); */
   };
 
+  useEffect(() => {
+    // get food id
+    const updateFoodId = getClickFoodIdInLs();
+    // get food all info
+    axios
+      .get(`http://localhost:5000/food/${updateFoodId}`, {
+        withCredentials: true,
+      })
+      .then(res => {
+        setUpdateFood(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="container mx-auto">
       <Title>Update Your Food</Title>
@@ -62,6 +93,7 @@ const UpdateFood = () => {
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type="url"
+                defaultValue={foodImg}
                 placeholder="Food Image"
                 required
                 name="foodImage"
@@ -74,6 +106,7 @@ const UpdateFood = () => {
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type="text"
+                defaultValue={foodName}
                 name="foodName"
                 placeholder="Food Name"
                 required
@@ -86,6 +119,7 @@ const UpdateFood = () => {
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type="number"
+                defaultValue={foodQuantity}
                 name="foodQuantity"
                 placeholder="Food Quantity"
                 required
@@ -99,6 +133,7 @@ const UpdateFood = () => {
                 className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type="date"
                 name="expiredDate"
+                defaultValue={expiredDate}
                 required
               />
             </div>
@@ -110,6 +145,7 @@ const UpdateFood = () => {
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 pr-8 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
                 type="text"
                 name="additionalNotes"
+                defaultValue={additionalNotes}
                 placeholder="Additional Notes"
                 required
               />
@@ -121,6 +157,7 @@ const UpdateFood = () => {
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 type="text"
+                defaultValue={pickupLocation}
                 name="pickupLocation"
                 placeholder="Pickup Location"
                 required
@@ -185,9 +222,10 @@ const UpdateFood = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="btn border-[#f86f03] hover:bg-orange-500 outline-none  text-[#f86f03] hover:text-white bg-transparent max-lg:mt-7"
+              className="btn hover:border-[#f86f03] bg-orange-500 outline-none  hover:text-[#f86f03] text-white  hover:bg-transparent hover:border my-7"
             >
-              Add Food <BsDatabaseAdd></BsDatabaseAdd>
+              Update Food{" "}
+              <MdOutlineUpdate className="text-xl"></MdOutlineUpdate>
             </button>
           </div>
         </form>

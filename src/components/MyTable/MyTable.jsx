@@ -14,6 +14,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { HiRefresh } from "react-icons/hi";
 import { setClickFoodIdInLs } from "../../utils/localStorage";
+import { Link } from "react-router-dom";
 const defaultData = [
   {
     firstName: "tanner",
@@ -78,12 +79,14 @@ const columns = [
     id: "action",
     cell: props => (
       <div className="flex gap-4 lg:gap-8 justify-center px-2">
-        <button
-          onClick={() => setClickFoodIdInLs(props.row.original._id)}
-          className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-primary"
-        >
-          <FiEdit2></FiEdit2>
-        </button>
+        <Link to="/update_food">
+          <button
+            onClick={() => setClickFoodIdInLs(props.row.original._id)}
+            className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-primary"
+          >
+            <FiEdit2></FiEdit2>
+          </button>
+        </Link>
         <button
           onClick={() => setClickFoodIdInLs(props.row.original._id)}
           className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-secondary"

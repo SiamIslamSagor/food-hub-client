@@ -9,6 +9,7 @@ import AvailableFoods from "../page/AvailableFoods/AvailableFoods";
 import FoodDetails from "../page/FoodDetails";
 import AddFood from "../page/AddFood";
 import ManageFood from "../page/ManageFood";
+import UpdateFood from "../page/UpdateFood";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <ManageFood></ManageFood>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "update_food",
+        element: (
+          <PrivetRoute>
+            <UpdateFood></UpdateFood>
           </PrivetRoute>
         ),
       },
