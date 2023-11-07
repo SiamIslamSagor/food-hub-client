@@ -2,6 +2,7 @@ import Title from "../components/Title/Title";
 import { BsDatabaseAdd } from "react-icons/bs";
 import useContextData from "../hooks/useContextData";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const AddFood = () => {
   // context data
@@ -20,8 +21,8 @@ const AddFood = () => {
     const pickupLocation = form.pickupLocation.value;
     const foodStatus = form.foodStatus.value;
 
-    const formData = {
-      foodImage,
+    const addedFood = {
+      foodImg: foodImage,
       foodName,
       foodQuantity,
       expiredDate,
@@ -32,48 +33,19 @@ const AddFood = () => {
       donarName: user?.displayName || "Not Given",
       donarEmail: user?.email || "Not Given",
     };
-    console.log(formData);
-    console.log(e.target);
+    console.log(addedFood);
 
-    /* // get current date
-    const currentDate = new Date();
-    // get day, month and year
-    const year = currentDate.getFullYear().toString();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const day = currentDate.getDay().toString();
-    // current request date
-    const requestDate = `${year}-${month}-${day}`; */
-    // const requestedAdditional
-    /* const requestedFoodInfo = {
-      id: _id,
-      foodImg,
-      foodName,
-      foodQuantity,
-      foodStatus,
-      pickupLocation,
-      expiredDate,
-      requestDate,
-      donarImg,
-      donarName,
-      donarEmail,
-      additionalNotes: additionalNotesRef.current.value || "Not Given",
-      donationMony: donationMonyRef.current.value || "Not Given",
-      requesterName: user?.displayName || "Not Given",
-      requesterEmail: user?.email || "Not Given",
-      requesterImage: user?.photoURL || "Not Given",
-    };
-    console.log(requestedFoodInfo); */
-    /* // send in server side
+    // send added food in server side and database
     axios
-      .post("http://localhost:5000/requestCollection", requestedFoodInfo, {
+      .post("http://localhost:5000/", addedFood, {
         withCredentials: true,
       })
       .then(() => {
-        toast.success("Request successfully.", { id: toastId });
+        toast.success("Food Added successfully.", { id: toastId });
       })
       .catch(() => {
-        toast.error("Request Failed.", { id: toastId });
-      }); */
+        toast.error("Food Added Failed.", { id: toastId });
+      });
   };
 
   return (
