@@ -117,7 +117,7 @@ const AvailableFoods = () => {
         </div>{" "}
       </div>
       {foodAvailable ? (
-        <NoFood></NoFood>
+        <NoFood>No food available for this name</NoFood>
       ) : (
         <div>
           {isLoading && <Loader></Loader>}

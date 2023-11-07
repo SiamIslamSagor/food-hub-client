@@ -15,32 +15,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { HiRefresh } from "react-icons/hi";
 import { setClickFoodIdInLs } from "../../utils/localStorage";
 import { Link } from "react-router-dom";
-const defaultData = [
-  {
-    firstName: "tanner",
-    lastName: "linsley",
-    age: 24,
-    visits: 100,
-    status: "In Relationship",
-    progress: 50,
-  },
-  {
-    firstName: "tandy",
-    lastName: "miller",
-    age: 40,
-    visits: 40,
-    status: "Single",
-    progress: 80,
-  },
-  {
-    firstName: "joe",
-    lastName: "dirte",
-    age: 45,
-    visits: 20,
-    status: "Complicated",
-    progress: 10,
-  },
-];
+import NoFood from "../Lodder/NoFood";
+const defaultData = [];
 
 const columnHelper = createColumnHelper();
 
@@ -148,65 +124,81 @@ const MyTable = () => {
 
   return (
     <div className="p-2 overflow-x-auto overflow-y-hidden">
-      <table className="container w-full mx-auto max-sm:max-w-xs">
-        <thead>
-          {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map(header => (
-                <th
-                  className="text-2xl md:p-3 lg:p-5 lg:text-3xl"
-                  key={header.id}
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
+      {data?.length === 0 ? (
+        <NoFood>
+          You have not added any food
+          <Link to="/add_food">
+            <span className="text-lg hover:underline cursor-pointer text-blue-600 ml-5">
+              Add food now
+            </span>
+          </Link>
+        </NoFood>
+      ) : (
+        <div className="overflow-x-auto overflow-y-hidden">
+          <table className="container w-full mx-auto max-sm:max-w-xs">
+            <thead>
+              {table.getHeaderGroups().map(headerGroup => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map(header => (
+                    <th
+                      className="text-2xl md:p-3 lg:p-5 lg:text-3xl"
+                      key={header.id}
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map(row => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map(cell => (
+                    <td
+                      className="text-center text-xl lg:text-2xl p-2 text-gray-600 border-2"
+                      key={cell.id}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
                       )}
-                </th>
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <td
-                  className="text-center text-xl lg:text-2xl p-2 text-gray-600 border-2"
-                  key={cell.id}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+            </tbody>
+            <tfoot>
+              {table.getFooterGroups().map(footerGroup => (
+                <tr key={footerGroup.id}>
+                  {footerGroup.headers.map(header => (
+                    <th key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.footer,
+                            header.getContext()
+                          )}
+                    </th>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          {table.getFooterGroups().map(footerGroup => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map(header => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
-      </table>
-      <div className="h-4 text-center container mx-auto my-10">
-        <button
-          onClick={() => rerender()}
-          className="btn hover:border-[#f86f03] bg-orange-500 outline-none  hover:text-[#f86f03] text-white  hover:bg-transparent hover:border"
-        >
-          Refresh <HiRefresh className="text-xl"></HiRefresh>
-        </button>
-      </div>
+            </tfoot>
+          </table>
+          <div className="h-4 text-center container mx-auto my-10">
+            <button
+              onClick={() => rerender()}
+              className="btn hover:border-[#f86f03] bg-orange-500 outline-none  hover:text-[#f86f03] text-white  hover:bg-transparent hover:border"
+            >
+              Refresh <HiRefresh className="text-xl"></HiRefresh>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
