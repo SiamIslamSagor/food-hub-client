@@ -42,6 +42,7 @@ const AddFood = () => {
       })
       .then(() => {
         toast.success("Food Added successfully.", { id: toastId });
+        form.reset();
       })
       .catch(() => {
         toast.error("Food Added Failed.", { id: toastId });

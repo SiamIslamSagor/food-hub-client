@@ -16,6 +16,7 @@ import { HiRefresh } from "react-icons/hi";
 import { setClickFoodIdInLs } from "../../utils/localStorage";
 import { Link } from "react-router-dom";
 import NoFood from "../Lodder/NoFood";
+import Swal from "sweetalert2";
 const defaultData = [];
 
 const columnHelper = createColumnHelper();
@@ -63,12 +64,16 @@ const columns = [
             <FiEdit2></FiEdit2>
           </button>
         </Link>
-        <button
-          onClick={() => setClickFoodIdInLs(props.row.original._id)}
-          className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-secondary"
-        >
-          <MdManageSearch className="text-3xl"></MdManageSearch>
-        </button>
+
+        <Link to={`/manage_food/${props.row.original._id}`}>
+          <button
+            onClick={() => setClickFoodIdInLs(props.row.original._id)}
+            className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-secondary"
+          >
+            <MdManageSearch className="text-3xl"></MdManageSearch>
+          </button>
+        </Link>
+
         <button
           onClick={() => handleDelete(props.row.original._id)}
           className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-neutral"
@@ -84,17 +89,33 @@ const columns = [
 
 // click handler
 const handleDelete = id => {
-  const toastId = toast.loading("processing...");
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then(result => {
+    if (result.isConfirmed) {
+      const toastId = toast.loading("processing...");
 
-  console.log("delete food", id);
-  // delete operation in database
-  axios
-    .delete(`http://localhost:5000/delete_food/${id}`)
-    .then(() => {
-      toast.success("Product Deleted Successfully", { id: toastId });
-      window.location.reload();
-    })
-    .catch(() => toast.error("Product Delete Failed", { id: toastId }));
+      // delete operation in database
+      axios
+        .delete(`http://localhost:5000/delete_food/${id}`)
+        .then(() => {
+          toast.success("Food Deleted Successfully", { id: toastId });
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          window.location.reload();
+        })
+        .catch(() => toast.error("Food Delete Failed", { id: toastId }));
+    }
+  });
 };
 
 const MyTable = () => {

@@ -243,17 +243,21 @@ const NavBar = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="mt-6 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                    className="mt-6 z-[1] px-2 shadow menu menu-sm space-y-4 dropdown-content bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <p className="mx-auto">{user?.displayName}</p>
+                      <p className="mx-auto max-w-[150px] overflow-hidden ">
+                        {user?.displayName}
+                      </p>
                     </li>
                     <li>
-                      <p className="mx-auto">{user?.email}</p>
+                      <p className="mx-auto max-w-[160px] overflow-hidden overflow-x-scroll">
+                        {user?.email}
+                      </p>
                     </li>
                     <li>
                       <button
-                        className="btn btn-sm max-w-[190px]"
+                        className="btn btn-sm max-w-[165px]"
                         onClick={handleLogOut}
                       >
                         Logout <LuLogOut></LuLogOut>
@@ -264,7 +268,7 @@ const NavBar = () => {
               )}
             </div>
 
-            <div className=" xl:hidden space-x-2">
+            <div className=" xl:hidden space-x-2 flex">
               <label className="swap swap-rotate">
                 {/* this hidden checkbox controls the state */}
                 <input
@@ -321,17 +325,21 @@ const NavBar = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="mt-6 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                    className="mt-6 z-[1] px-2 shadow menu menu-sm space-y-4 dropdown-content bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <p className="mx-auto">{user?.displayName}</p>
+                      <p className="mx-auto max-w-[150px] overflow-hidden ">
+                        {user?.displayName}
+                      </p>
                     </li>
                     <li>
-                      <p className="mx-auto">{user?.email}</p>
+                      <p className="mx-auto max-w-[160px] overflow-hidden overflow-x-scroll">
+                        {user?.email}
+                      </p>
                     </li>
                     <li>
                       <button
-                        className="btn btn-sm max-w-[190px]"
+                        className="btn btn-sm max-w-[165px]"
                         onClick={handleLogOut}
                       >
                         Logout <LuLogOut></LuLogOut>

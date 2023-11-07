@@ -19,7 +19,7 @@ const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
   // context data
-  const { createUser, googleLogin, user, updateUserData, setLoading, loading } =
+  const { createUser, googleLogin, updateUserData, setLoading, loading } =
     useContextData();
 
   // click handler
@@ -35,7 +35,13 @@ const Register = () => {
     const password = form.password.value;
     const photoUrl = form.photoUrl.value;
 
-    console.log(name, email, password, photoUrl);
+    // password validation
+    if (!/^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z!@#$%^&*\d]{6,}$/.test(password)) {
+      return toast(
+        "Please provide password they have at least 6 characters long, contain one uppercase letter, and have  one special character.",
+        { id: toastId }
+      );
+    }
 
     // crete user account
     createUser(email, password)
@@ -43,9 +49,8 @@ const Register = () => {
         console.log(res.user);
         // update user data
         updateUserData(name, photoUrl)
-          .then(res => {
+          .then(() => {
             setLoading(!loading);
-            console.log(res);
             form.reset();
             navigate(location.state ? location.state : "/");
           })

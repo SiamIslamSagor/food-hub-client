@@ -10,6 +10,7 @@ import FoodDetails from "../page/FoodDetails";
 import AddFood from "../page/AddFood";
 import ManageFood from "../page/ManageFood";
 import UpdateFood from "../page/UpdateFood";
+import FoodRequestManage from "../page/FoodRequestManage";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,16 @@ const router = createBrowserRouter([
             <ManageFood></ManageFood>
           </PrivetRoute>
         ),
+      },
+      {
+        path: "manage_food/:id",
+        element: (
+          <PrivetRoute>
+            <FoodRequestManage></FoodRequestManage>
+          </PrivetRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/requested_food/${params.id}`),
       },
       {
         path: "update_food",
