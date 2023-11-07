@@ -4,6 +4,7 @@ import useContextData from "../hooks/useContextData";
 import { useEffect, useState } from "react";
 import { getClickFoodIdInLs } from "../utils/localStorage";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const UpdateFood = () => {
   // context data
@@ -11,6 +12,9 @@ const UpdateFood = () => {
 
   //   state
   const [updateFood, setUpdateFood] = useState("");
+  const [foodId, setFoodId] = useState("");
+
+  //
   const {
     foodImg,
     foodName,
@@ -21,7 +25,7 @@ const UpdateFood = () => {
   } = updateFood;
 
   const handleSubmit = e => {
-    // const toastId = toast.loading("processing...");
+    const toastId = toast.loading("processing...");
 
     e.preventDefault();
     // get form data
@@ -34,7 +38,7 @@ const UpdateFood = () => {
     const pickupLocation = form.pickupLocation.value;
     const foodStatus = form.foodStatus.value;
 
-    const addedFood = {
+    const UpdatedFoodInfo = {
       foodImg: foodImage,
       foodName,
       foodQuantity,
@@ -46,24 +50,25 @@ const UpdateFood = () => {
       donarName: user?.displayName || "Not Given",
       donarEmail: user?.email || "Not Given",
     };
-    console.log(addedFood);
+    console.log(UpdatedFoodInfo);
 
-    /* // send added food in server side and database
+    // send added food in server side and database
     axios
-      .post("http://localhost:5000/", addedFood, {
+      .patch(`http://localhost:5000/update_food/${foodId}`, UpdatedFoodInfo, {
         withCredentials: true,
       })
       .then(() => {
-        toast.success("Food Added successfully.", { id: toastId });
+        toast.success("Food Update successfully.", { id: toastId });
       })
       .catch(() => {
-        toast.error("Food Added Failed.", { id: toastId });
-      }); */
+        toast.error("Food Update Failed.", { id: toastId });
+      });
   };
 
   useEffect(() => {
     // get food id
     const updateFoodId = getClickFoodIdInLs();
+    setFoodId(updateFoodId);
     // get food all info
     axios
       .get(`http://localhost:5000/food/${updateFoodId}`, {
