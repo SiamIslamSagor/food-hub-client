@@ -7,6 +7,7 @@ import PrivetRoute from "./PrivetRoute";
 import ErrorPage from "../page/ErrorPage";
 import AvailableFoods from "../page/AvailableFoods/AvailableFoods";
 import FoodDetails from "../page/FoodDetails";
+import AddFood from "../page/AddFood";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
         path: "add_food",
         element: (
           <PrivetRoute>
-            <p>add Foods</p>
+            <AddFood></AddFood>
           </PrivetRoute>
         ),
       },
