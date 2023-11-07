@@ -94,7 +94,7 @@ const columns = [
           <MdManageSearch className="text-3xl"></MdManageSearch>
         </button>
         <button
-          onClick={() => setClickFoodIdInLs(props.row.original._id)}
+          onClick={() => handleDelete(props.row.original._id)}
           className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-neutral"
         >
           <RiDeleteBin6Line></RiDeleteBin6Line>
@@ -105,6 +105,21 @@ const columns = [
     footer: info => info.column.id,
   }),
 ];
+
+// click handler
+const handleDelete = id => {
+  const toastId = toast.loading("processing...");
+
+  console.log("delete food", id);
+  // delete operation in database
+  axios
+    .delete(`http://localhost:5000/delete_food/${id}`)
+    .then(() => {
+      toast.success("Product Deleted Successfully", { id: toastId });
+      window.location.reload();
+    })
+    .catch(() => toast.error("Product Delete Failed", { id: toastId }));
+};
 
 const MyTable = () => {
   const { user } = useContextData();
