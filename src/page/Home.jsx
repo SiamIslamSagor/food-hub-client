@@ -2,6 +2,7 @@ import FeaturesFoods from "../components/FeaturesFoods/FeaturesFoods";
 import Hero from "../components/Hero/Hero";
 import Loader from "../components/Lodder/Loader";
 import MissionBanner from "../components/MissionBanner/MissionBanner";
+import MyTable from "../components/MyTable/MyTable";
 import Slider from "../components/Slider/Slider";
 import useContextData from "../hooks/useContextData";
 

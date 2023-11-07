@@ -8,6 +8,7 @@ import ErrorPage from "../page/ErrorPage";
 import AvailableFoods from "../page/AvailableFoods/AvailableFoods";
 import FoodDetails from "../page/FoodDetails";
 import AddFood from "../page/AddFood";
+import ManageFood from "../page/ManageFood";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
         path: "manage_my_foods",
         element: (
           <PrivetRoute>
-            <p>manage Foods</p>
+            <ManageFood></ManageFood>
           </PrivetRoute>
         ),
       },

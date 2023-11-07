@@ -19,7 +19,7 @@ const WebFooter = () => {
 
   return (
     <Footer bgDark>
-      <div className="w-full">
+      <div className="w-full bg-white">
         <div style={footerBgStyle} className="relative">
           <div className="grid w-full grid-cols-2 gap-8 px-6 py-8 md:grid-cols-4 container mx-auto  md:h-[470px] pt-64 lg:pt-72 text-white ">
             <div>
