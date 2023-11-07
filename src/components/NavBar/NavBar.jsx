@@ -2,9 +2,11 @@ import { NavLink, useLocation } from "react-router-dom";
 import foodHubLogo from "../../assets/images/foodHubLogo.png";
 import "./NavBar.css";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { LuLogOut } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import useContextData from "../../hooks/useContextData";
 import toast, { Toaster } from "react-hot-toast";
+import { FiLogIn } from "react-icons/fi";
 
 const NavBar = () => {
   // state
@@ -103,7 +105,7 @@ const NavBar = () => {
                 : window.scrollY >= 420 && "text-black"
             } hover:border`}
           >
-            login
+            <FiLogIn></FiLogIn> login
           </NavLink>
         </div>
       )}
@@ -184,7 +186,7 @@ const NavBar = () => {
                           "text-black"
                     } hover:border`}
                   >
-                    log Out
+                    log Out <LuLogOut></LuLogOut>
                   </button>
                 </div>
               )}
@@ -250,8 +252,11 @@ const NavBar = () => {
                       <p className="mx-auto">{user?.email}</p>
                     </li>
                     <li>
-                      <button className="btn btn-sm" onClick={handleLogOut}>
-                        Logout
+                      <button
+                        className="btn btn-sm max-w-[190px]"
+                        onClick={handleLogOut}
+                      >
+                        Logout <LuLogOut></LuLogOut>
                       </button>
                     </li>
                   </ul>
@@ -325,8 +330,11 @@ const NavBar = () => {
                       <p className="mx-auto">{user?.email}</p>
                     </li>
                     <li>
-                      <button className="btn btn-sm" onClick={handleLogOut}>
-                        Logout
+                      <button
+                        className="btn btn-sm max-w-[190px]"
+                        onClick={handleLogOut}
+                      >
+                        Logout <LuLogOut></LuLogOut>
                       </button>
                     </li>
                   </ul>

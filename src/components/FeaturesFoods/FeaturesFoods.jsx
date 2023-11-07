@@ -3,6 +3,7 @@ import FeaturesFoodsCard from "../FeaturesFoodsCard/FeaturesFoodsCard";
 import Loader from "../Lodder/Loader";
 import { Link } from "react-router-dom";
 import Title from "../Title/Title";
+import { TbBorderAll } from "react-icons/tb";
 
 const FeaturesFoods = () => {
   const { data, isLoading } = useFeaturedFoods();
@@ -26,7 +27,7 @@ const FeaturesFoods = () => {
           to="/available_foods"
           className={`btn px-8 hover:text-[#f86f03] bg-orange-500 outline-none  hover:border-[#f86f03] text-white  hover:bg-transparent hover: hover:border`}
         >
-          Show All
+          Show All <TbBorderAll className="text-xl"></TbBorderAll>
         </Link>
       </div>
     </div>

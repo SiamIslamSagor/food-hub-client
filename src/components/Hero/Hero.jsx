@@ -3,6 +3,7 @@
 import { Link } from "react-router-dom";
 import heroBg from "../../assets/images/FOODHubHero.png";
 import TypeWriter from "../TypeWriter/TypeWriter";
+import { FiLogIn } from "react-icons/fi";
 
 const Hero = () => {
   const heroBgStyle = {
@@ -47,7 +48,7 @@ const Hero = () => {
             </p>
             <Link to="/login">
               <button className="btn border-[#f86f03] hover:bg-orange-500 outline-none  hover:border-[#f86f03] text-white bg-transparent dark:bg-red-500 dark:text-green-700">
-                Get Started
+                Get Started <FiLogIn></FiLogIn>
               </button>
             </Link>
           </div>

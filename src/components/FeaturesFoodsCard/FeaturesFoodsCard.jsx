@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { TfiInfoAlt } from "react-icons/tfi";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
 const FeaturesFoodsCard = ({ food }) => {
   const {
@@ -50,7 +51,8 @@ const FeaturesFoodsCard = ({ food }) => {
         <div className="card-actions justify-end">
           <Link to={`/food/${_id}`}>
             <button className="btn border-[#f86f03] hover:bg-orange-500 outline-none  text-[#f86f03] hover:text-white bg-transparent  max-lg: max-xl:btn-sm">
-              View Details
+              View Details{" "}
+              <MdKeyboardDoubleArrowRight className="text-lg max-xl:text-xl"></MdKeyboardDoubleArrowRight>
             </button>
           </Link>
         </div>
