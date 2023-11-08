@@ -75,7 +75,9 @@ const columns = [
         </Link>
 
         <button
-          onClick={() => handleDelete(props.row.original._id)}
+          onClick={() =>
+            handleDelete(props.row.original._id, props.row.original.hexString)
+          }
           className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-neutral"
         >
           <RiDeleteBin6Line></RiDeleteBin6Line>
@@ -88,7 +90,9 @@ const columns = [
 ];
 
 // click handler
-const handleDelete = id => {
+const handleDelete = (id, hexString) => {
+  console.log("id is", id);
+  console.log("hexString is", hexString);
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -101,17 +105,31 @@ const handleDelete = id => {
     if (result.isConfirmed) {
       const toastId = toast.loading("processing...");
 
-      // delete operation in database
+      // delete form added food collection in database
       axios
         .delete(`http://localhost:5000/delete_food/${id}`)
         .then(() => {
-          toast.success("Food Deleted Successfully", { id: toastId });
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success",
-          });
-          window.location.reload();
+          // delete form foods collection in database
+          axios
+            .delete(`http://localhost:5000/delete_added_food/${hexString}`)
+            .then(() => {
+              toast.success("Food Deleted Successfully", { id: toastId });
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              window.location.reload();
+            })
+            .catch(() => toast.error("Food Delete Failed", { id: toastId }));
+
+          // toast.success("Food Deleted Successfully", { id: toastId });
+          // Swal.fire({
+          //   title: "Deleted!",
+          //   text: "Your file has been deleted.",
+          //   icon: "success",
+          // });
+          // window.location.reload();
         })
         .catch(() => toast.error("Food Delete Failed", { id: toastId }));
     }

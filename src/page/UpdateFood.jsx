@@ -22,6 +22,7 @@ const UpdateFood = () => {
     expiredDate,
     additionalNotes,
     pickupLocation,
+    hexString,
   } = updateFood;
 
   const handleSubmit = e => {
@@ -52,13 +53,27 @@ const UpdateFood = () => {
     };
     console.log(UpdatedFoodInfo);
 
-    // send added food in server side and database
+    // send updated food in server side and database
     axios
       .patch(`http://localhost:5000/update_food/${foodId}`, UpdatedFoodInfo, {
         withCredentials: true,
       })
       .then(() => {
-        toast.success("Food Update successfully.", { id: toastId });
+        // send updated food in server side and database foods collection
+        axios
+          .patch(
+            `http://localhost:5000/update_food_in_foodsCollection/${hexString}`,
+            UpdatedFoodInfo,
+            {
+              withCredentials: true,
+            }
+          )
+          .then(() => {
+            toast.success("Food Update successfully.", { id: toastId });
+          })
+          .catch(() => {
+            toast.error("Food Update Failed.", { id: toastId });
+          });
       })
       .catch(() => {
         toast.error("Food Update Failed.", { id: toastId });
@@ -71,7 +86,7 @@ const UpdateFood = () => {
     setFoodId(updateFoodId);
     // get food all info
     axios
-      .get(`http://localhost:5000/food/${updateFoodId}`, {
+      .get(`http://localhost:5000/added_food_find/${updateFoodId}`, {
         withCredentials: true,
       })
       .then(res => {

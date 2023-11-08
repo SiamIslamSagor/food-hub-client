@@ -2,7 +2,6 @@
 import { useLoaderData } from "react-router-dom";
 import Title from "../components/Title/Title";
 import { BsArrowRightCircle, BsInfoCircle } from "react-icons/bs";
-import { FiEdit2 } from "react-icons/fi";
 import { GoGitPullRequest } from "react-icons/go";
 import useContextData from "../hooks/useContextData";
 import { useRef } from "react";
@@ -272,27 +271,25 @@ const FoodDetails = () => {
                   Additional Notes
                 </label>
                 <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 pr-8 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 relative"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 pr-8 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   type="text"
                   ref={additionalNotesRef}
                   name="additionalNotes"
                   placeholder="Additional Notes"
                   defaultValue={additionalNotes}
                 />
-                <FiEdit2 className="absolute bottom-[205px] right-8 text-lg"></FiEdit2>
               </div>
               <div className="w-full px-3">
                 <label className="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2">
                   Donation Mony
                 </label>
                 <input
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 pr-8 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 relative"
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 pr-8 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   type="text"
                   ref={donationMonyRef}
                   name="donationMony"
                   placeholder="Donation Mony"
                 />
-                <FiEdit2 className="absolute bottom-[125px] right-8 text-lg"></FiEdit2>
               </div>
             </div>
             <div className="text-center">

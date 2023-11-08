@@ -3,6 +3,7 @@ import { BsDatabaseAdd } from "react-icons/bs";
 import useContextData from "../hooks/useContextData";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { generateRandomHexString } from "../utils/hexCode";
 
 const AddFood = () => {
   // context data
@@ -20,6 +21,7 @@ const AddFood = () => {
     const additionalNotes = form.additionalNotes.value;
     const pickupLocation = form.pickupLocation.value;
     const foodStatus = form.foodStatus.value;
+    const hexString = generateRandomHexString(30);
 
     const addedFood = {
       foodImg: foodImage,
@@ -32,17 +34,31 @@ const AddFood = () => {
       donarImg: user?.photoURL || "Not Given",
       donarName: user?.displayName || "Not Given",
       donarEmail: user?.email || "Not Given",
+      hexString,
     };
     console.log(addedFood);
 
     // send added food in server side and database
     axios
-      .post("http://localhost:5000/", addedFood, {
+      .post("http://localhost:5000/added_foods", addedFood, {
         withCredentials: true,
       })
       .then(() => {
-        toast.success("Food Added successfully.", { id: toastId });
-        form.reset();
+        // send added food in foods collection
+        axios
+          .post("http://localhost:5000/available_foods/add", addedFood, {
+            withCredentials: true,
+          })
+          .then(() => {
+            toast.success("Food Added successfully.", { id: toastId });
+            form.reset();
+          })
+          .catch(() => {
+            toast.error("Food Added Failed.", { id: toastId });
+          });
+
+        /* toast.success("Food Added successfully.", { id: toastId });
+        form.reset(); */
       })
       .catch(() => {
         toast.error("Food Added Failed.", { id: toastId });

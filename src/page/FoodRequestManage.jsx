@@ -18,14 +18,29 @@ const FoodRequestManage = () => {
         withCredentials: true,
       })
       .then(() => {
-        // delete food form available food
+        // change food status form added food food
+        axios
+          .patch(`http://localhost:5000/added_food_status/${foodId}`)
+          .then(() => {
+            // delete food form available food
+            axios
+              .delete(`http://localhost:5000/delete_food/${foodId}`)
+              .then(() => {
+                window.location.reload();
+                toast.success("Food Delivered Successfully");
+              })
+              .catch(() => toast.error("Food Delivered Failed"));
+          })
+          .catch(() => toast.error("Food Delivered Failed"));
+
+        /* // delete food form available food
         axios
           .delete(`http://localhost:5000/delete_food/${foodId}`)
           .then(() => {
             window.location.reload();
             toast.success("Food Delivered Successfully");
           })
-          .catch(() => toast.error("Food Delivered Failed"));
+          .catch(() => toast.error("Food Delivered Failed")); */
       })
       .catch(() => {
         toast.error("Food Delivered Failed.");
