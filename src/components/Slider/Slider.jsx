@@ -52,7 +52,7 @@ const Slider = () => {
   ];
 
   return (
-    <div className="h-[340px] max-sm:h-[440px] max-md:h-[490px] max-lg:h-[540px]  max-xl:h-[620px] max-2xl:h-[660px] 2xl:h-[690px] w-full mx-auto ">
+    <div className="h-[340px] my-32 max-sm:h-[440px] max-md:h-[490px] max-lg:h-[540px]  max-xl:h-[620px] max-2xl:h-[660px] 2xl:h-[690px] w-full mx-auto ">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
