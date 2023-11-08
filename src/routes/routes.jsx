@@ -34,7 +34,7 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/food/${params.id}`),
+          fetch(`http://localhost:5000/get_food/${params.id}`),
       },
       {
         path: "add_food",

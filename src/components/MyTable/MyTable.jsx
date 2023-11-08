@@ -67,7 +67,12 @@ const columns = [
 
         <Link to={`/manage_food/${props.row.original._id}`}>
           <button
-            onClick={() => setClickFoodIdInLs(props.row.original._id)}
+            onClick={() => {
+              console.log("all", props.row.original?.hexString);
+              console.log("hex", props.row.original.hexString);
+              setClickFoodIdInLs(props.row.original._id);
+              localStorage.setItem("manage", props.row.original?.hexString);
+            }}
             className="btn h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 btn-circle text-xl btn-sm btn-secondary"
           >
             <MdManageSearch className="text-3xl"></MdManageSearch>
@@ -122,14 +127,6 @@ const handleDelete = (id, hexString) => {
               window.location.reload();
             })
             .catch(() => toast.error("Food Delete Failed", { id: toastId }));
-
-          // toast.success("Food Deleted Successfully", { id: toastId });
-          // Swal.fire({
-          //   title: "Deleted!",
-          //   text: "Your file has been deleted.",
-          //   icon: "success",
-          // });
-          // window.location.reload();
         })
         .catch(() => toast.error("Food Delete Failed", { id: toastId }));
     }

@@ -13,6 +13,7 @@ const FoodDetails = () => {
   const { user } = useContextData();
   // single food data form loader
   const food = useLoaderData();
+  console.log(food?.hexString);
 
   /// ref
   const additionalNotesRef = useRef();
@@ -63,6 +64,7 @@ const FoodDetails = () => {
       requesterName: user?.displayName || "Not Given",
       requesterEmail: user?.email || "Not Given",
       requesterImage: user?.photoURL || "Not Given",
+      hexString: food?.hexString || "Not Given",
     };
     console.log(requestedFoodInfo);
     // send in server side

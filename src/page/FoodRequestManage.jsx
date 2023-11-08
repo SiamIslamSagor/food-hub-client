@@ -3,11 +3,14 @@ import Title from "../components/Title/Title";
 import NoFood from "../components/Lodder/NoFood";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 const FoodRequestManage = () => {
   // loader data in route
-  const data = useLoaderData();
-  console.log(data);
+  const requestedFood = useLoaderData();
+  console.log(requestedFood);
+  // state
+  const [request, setRequest] = useState([]);
   //   handler
   const handleStatusChange = (id, foodId) => {
     console.log(id, foodId);
@@ -20,46 +23,58 @@ const FoodRequestManage = () => {
       .then(() => {
         // change food status form added food food
         axios
-          .patch(`http://localhost:5000/added_food_status/${foodId}`)
+          .delete(
+            `http://localhost:5000/delete_food_in_foodCollection/${foodId}`
+          )
           .then(() => {
+            console.log("delete_food_in_foodCollection done");
             // delete food form available food
             axios
-              .delete(`http://localhost:5000/delete_food/${foodId}`)
+              .patch(
+                `http://localhost:5000/change_status_added_foodCollection/${requestedFood?.hexString}`
+              )
               .then(() => {
-                window.location.reload();
                 toast.success("Food Delivered Successfully");
+                window.location.reload();
               })
               .catch(() => toast.error("Food Delivered Failed"));
           })
           .catch(() => toast.error("Food Delivered Failed"));
-
-        /* // delete food form available food
-        axios
-          .delete(`http://localhost:5000/delete_food/${foodId}`)
-          .then(() => {
-            window.location.reload();
-            toast.success("Food Delivered Successfully");
-          })
-          .catch(() => toast.error("Food Delivered Failed")); */
       })
       .catch(() => {
         toast.error("Food Delivered Failed.");
       });
   };
 
+  useEffect(() => {
+    const getClickedFoodHexString = localStorage.getItem("manage");
+
+    // get requested people
+    axios
+      .get(
+        `http://localhost:5000/get_requested_people/${getClickedFoodHexString}`
+      )
+      .then(res => {
+        // delete food form available food
+        setRequest(res.data);
+        console.log(res.data);
+      })
+      .catch(() => toast.error("Food Delivered Failed"));
+  }, []);
+
   return (
     <div className="container mx-auto">
       <div className="">
         <Title>Manage a Food</Title>
         {/* {data || <NoFood>No Request for This Food</NoFood>} */}
-        {data?.length !== 0 && (
+        {request?.length !== 0 && (
           <h5 className="text-center text-2xl md:text-4xl lg:text-5xl mb-24">
-            {data?.length} People Have Requested for This Food.
+            {requestedFood?.length} People Have Requested for This Food.
           </h5>
         )}
-        {data?.length !== 0 ? (
+        {request?.length !== 0 ? (
           <div className="min-h-[85vh] grid grid-cols-1 md:grid-cols-2 mx-2 gap-8 xl:grid-cols-3 justify-items-center">
-            {data?.map(req => {
+            {request?.map(req => {
               return (
                 <div
                   key={req._id}
