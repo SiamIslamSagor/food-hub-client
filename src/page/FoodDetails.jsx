@@ -7,6 +7,7 @@ import useContextData from "../hooks/useContextData";
 import { useRef } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const FoodDetails = () => {
   // context data
@@ -69,9 +70,13 @@ const FoodDetails = () => {
     console.log(requestedFoodInfo);
     // send in server side
     axios
-      .post("http://localhost:5000/requestCollection", requestedFoodInfo, {
-        withCredentials: true,
-      })
+      .post(
+        "https://food-hub-server-hazel.vercel.app/requestCollection",
+        requestedFoodInfo,
+        {
+          withCredentials: true,
+        }
+      )
       .then(() => {
         toast.success("Request successfully.", { id: toastId });
       })
@@ -82,6 +87,9 @@ const FoodDetails = () => {
 
   return (
     <div className="container mx-auto min-h-screen">
+      <Helmet>
+        <title>FoodHub | Food Details</title>
+      </Helmet>
       <Title>Food Details:</Title>
       <div className="">
         <div className="max-sm:px-2 max-w-2xl lg:max-w-4xl xl:max-w-6xl card lg:card-side bg-base-100 shadow-xl mx-auto">

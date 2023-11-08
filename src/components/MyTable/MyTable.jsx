@@ -17,6 +17,7 @@ import { setClickFoodIdInLs } from "../../utils/localStorage";
 import { Link } from "react-router-dom";
 import NoFood from "../Lodder/NoFood";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const defaultData = [];
 
 const columnHelper = createColumnHelper();
@@ -112,11 +113,13 @@ const handleDelete = (id, hexString) => {
 
       // delete form added food collection in database
       axios
-        .delete(`http://localhost:5000/delete_food/${id}`)
+        .delete(`https://food-hub-server-hazel.vercel.app/delete_food/${id}`)
         .then(() => {
           // delete form foods collection in database
           axios
-            .delete(`http://localhost:5000/delete_added_food/${hexString}`)
+            .delete(
+              `https://food-hub-server-hazel.vercel.app/delete_added_food/${hexString}`
+            )
             .then(() => {
               toast.success("Food Deleted Successfully", { id: toastId });
               Swal.fire({
@@ -135,8 +138,13 @@ const handleDelete = (id, hexString) => {
 
 const MyTable = () => {
   const { user } = useContextData();
+  // get axios
+  const axiosSecure = useAxiosSecure();
   const [data, setData] = useState([...defaultData]);
   const rerender = useReducer(() => ({}), {})[1];
+
+  // url
+  const url = `https://food-hub-server-hazel.vercel.app/added_Food?email=${user?.email}`;
 
   const table = useReactTable({
     data,
@@ -147,16 +155,27 @@ const MyTable = () => {
   //
   useEffect(() => {
     // send added food in server side and database
-    axios
-      .get(`http://localhost:5000/added_Food?email=${user?.email}`)
+
+    axiosSecure
+      .get(url)
+      .then(res => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch(err => {
+        toast.error("Failed to Load Added Foods.");
+        console.log(err);
+      });
+    /* axios
+      .get()
       .then(res => {
         setData(res.data);
       })
       .catch(err => {
         toast.error("Failed to Load Added Foods.");
         console.log(err);
-      });
-  }, [user?.email]);
+      }); */
+  }, [url, axiosSecure]);
 
   return (
     <div className="p-2 overflow-x-auto overflow-y-hidden">

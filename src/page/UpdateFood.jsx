@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getClickFoodIdInLs } from "../utils/localStorage";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const UpdateFood = () => {
   // context data
@@ -55,14 +56,18 @@ const UpdateFood = () => {
 
     // send updated food in server side and database
     axios
-      .patch(`http://localhost:5000/update_food/${foodId}`, UpdatedFoodInfo, {
-        withCredentials: true,
-      })
+      .patch(
+        `https://food-hub-server-hazel.vercel.app/update_food/${foodId}`,
+        UpdatedFoodInfo,
+        {
+          withCredentials: true,
+        }
+      )
       .then(() => {
         // send updated food in server side and database foods collection
         axios
           .patch(
-            `http://localhost:5000/update_food_in_foodsCollection/${hexString}`,
+            `https://food-hub-server-hazel.vercel.app/update_food_in_foodsCollection/${hexString}`,
             UpdatedFoodInfo,
             {
               withCredentials: true,
@@ -86,9 +91,12 @@ const UpdateFood = () => {
     setFoodId(updateFoodId);
     // get food all info
     axios
-      .get(`http://localhost:5000/added_food_find/${updateFoodId}`, {
-        withCredentials: true,
-      })
+      .get(
+        `https://food-hub-server-hazel.vercel.app/added_food_find/${updateFoodId}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then(res => {
         setUpdateFood(res.data);
       })
@@ -99,6 +107,9 @@ const UpdateFood = () => {
 
   return (
     <div className="container mx-auto">
+      <Helmet>
+        <title>FoodHub | Update a Food</title>
+      </Helmet>
       <Title>Update Your Food</Title>
       <div className="flex items-center justify-center max-sm:px-2">
         <form

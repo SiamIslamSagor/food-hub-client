@@ -10,6 +10,7 @@ import RegisterAnim from "./RegisterAnim";
 import TypeWriter from "../TypeWriter/TypeWriter";
 import useContextData from "../../hooks/useContextData";
 import toast, { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   // state
@@ -95,6 +96,9 @@ const Register = () => {
 
   return (
     <div className="container mx-auto my-auto flex items-center justify-between flex-row-reverse max-lg:flex-col">
+      <Helmet>
+        <title>FoodHub | Register</title>
+      </Helmet>
       <Toaster></Toaster>
       <div
         style={cardBg}

@@ -35,7 +35,9 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/get_food/${params.id}`),
+          fetch(
+            `https://food-hub-server-hazel.vercel.app/get_food/${params.id}`
+          ),
       },
       {
         path: "add_food",
@@ -61,7 +63,9 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/requested_food/${params.id}`),
+          fetch(
+            `https://food-hub-server-hazel.vercel.app/requested_food/${params.id}`
+          ),
       },
       {
         path: "update_food",

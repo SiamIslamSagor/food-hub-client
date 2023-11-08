@@ -4,7 +4,7 @@ const useFeaturedFoods = () => {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["featureds foods in home page"],
     queryFn: async () => {
-      const dataa = await fetch("http://localhost:5000/");
+      const dataa = await fetch("https://food-hub-server-hazel.vercel.app/");
       return await dataa.json();
     },
   });

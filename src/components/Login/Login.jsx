@@ -8,6 +8,7 @@ import LoginAnim from "./LoginAnim";
 import TypeWriter from "../TypeWriter/TypeWriter";
 import useContextData from "../../hooks/useContextData";
 import toast, { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   // state
@@ -78,6 +79,9 @@ const Login = () => {
 
   return (
     <div className="container mx-auto my-auto flex items-center justify-between flex-row max-lg:flex-col">
+      <Helmet>
+        <title>FoodHub | Login</title>
+      </Helmet>
       <Toaster></Toaster>
       <div
         style={cardBg}

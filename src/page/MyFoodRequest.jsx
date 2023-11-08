@@ -4,11 +4,21 @@ import toast from "react-hot-toast";
 import useContextData from "../hooks/useContextData";
 import Title from "../components/Title/Title";
 import NoFood from "../components/Lodder/NoFood";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MyFoodRequest = () => {
   // context data
   const { user } = useContextData();
   const [myAllRequest, setMyAllRequest] = useState([]);
+
+  // hook
+  const axiosSecure = useAxiosSecure();
+
+  //
+  //   const url = `https://food-hub-server-hazel.vercel.app/my_all_request?email=${user?.email}`;
+
+  const url = `/my_all_request?email=${user?.email}`;
 
   /// handle delete request
   const handleDeleteRequest = id => {
@@ -17,7 +27,7 @@ const MyFoodRequest = () => {
     console.log(id);
     //
     axios
-      .delete(`http://localhost:5000/delete_request/${id}`)
+      .delete(`https://food-hub-server-hazel.vercel.app/delete_request/${id}`)
       .then(() => {
         toast.success("Request cancel Successfully.", { id: toastId });
         location.reload();
@@ -30,8 +40,15 @@ const MyFoodRequest = () => {
   // use effect
   useEffect(() => {
     // send added food in server side and database
-    axios
-      .get(`http://localhost:5000/my_all_request?email=${user?.email}`)
+    axiosSecure.get(url).then(res => {
+      setMyAllRequest(res.data);
+      console.log(res.data);
+    });
+    //
+    /* axios
+      .get(`https://food-hub-server-hazel.vercel.app/my_all_request?email=${user?.email}`, {
+        withCredentials: true,
+      })
       .then(res => {
         setMyAllRequest(res.data);
         console.log(res.data);
@@ -39,11 +56,14 @@ const MyFoodRequest = () => {
       .catch(err => {
         toast.error("Failed to Load Added Foods.");
         console.log(err);
-      });
-  }, [user?.email]);
+      }); */
+  }, [axiosSecure, url]);
 
   return (
     <div>
+      <Helmet>
+        <title>FoodHub | My Food Request</title>
+      </Helmet>
       <Title>My All Food Request</Title>
       {myAllRequest?.length === 0 ? (
         <NoFood>You do not have request for any food</NoFood>

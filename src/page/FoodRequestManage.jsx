@@ -4,6 +4,7 @@ import NoFood from "../components/Lodder/NoFood";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const FoodRequestManage = () => {
   // loader data in route
@@ -17,21 +18,21 @@ const FoodRequestManage = () => {
 
     // update status in requestedFoodCollection
     axios
-      .patch(`http://localhost:5000/food_status/${id}`, {
+      .patch(`https://food-hub-server-hazel.vercel.app/food_status/${id}`, {
         withCredentials: true,
       })
       .then(() => {
         // change food status form added food food
         axios
           .delete(
-            `http://localhost:5000/delete_food_in_foodCollection/${foodId}`
+            `https://food-hub-server-hazel.vercel.app/delete_food_in_foodCollection/${foodId}`
           )
           .then(() => {
             console.log("delete_food_in_foodCollection done");
             // delete food form available food
             axios
               .patch(
-                `http://localhost:5000/change_status_added_foodCollection/${requestedFood?.hexString}`
+                `https://food-hub-server-hazel.vercel.app/change_status_added_foodCollection/${requestedFood?.hexString}`
               )
               .then(() => {
                 toast.success("Food Delivered Successfully");
@@ -52,7 +53,7 @@ const FoodRequestManage = () => {
     // get requested people
     axios
       .get(
-        `http://localhost:5000/get_requested_people/${getClickedFoodHexString}`
+        `https://food-hub-server-hazel.vercel.app/get_requested_people/${getClickedFoodHexString}`
       )
       .then(res => {
         // delete food form available food
@@ -64,6 +65,9 @@ const FoodRequestManage = () => {
 
   return (
     <div className="container mx-auto">
+      <Helmet>
+        <title>FoodHub | Manage a Food</title>
+      </Helmet>
       <div className="">
         <Title>Manage a Food</Title>
         {/* {data || <NoFood>No Request for This Food</NoFood>} */}

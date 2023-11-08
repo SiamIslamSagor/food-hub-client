@@ -2,9 +2,13 @@ import Lottie from "lottie-react";
 import errorAnim from "../assets/animSVG/notFoundAnim.json";
 import { BsChevronDoubleLeft } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const ErrorPage = () => {
   return (
     <div className="container mx-auto flex flex-col  items-center justify-center">
+      <Helmet>
+        <title>ERR</title>
+      </Helmet>
       <div className="anim-div">
         <Lottie animationData={errorAnim} loop={true}></Lottie>;
       </div>

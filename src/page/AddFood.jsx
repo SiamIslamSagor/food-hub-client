@@ -4,6 +4,7 @@ import useContextData from "../hooks/useContextData";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { generateRandomHexString } from "../utils/hexCode";
+import { Helmet } from "react-helmet-async";
 
 const AddFood = () => {
   // context data
@@ -40,15 +41,19 @@ const AddFood = () => {
 
     // send added food in server side and database
     axios
-      .post("http://localhost:5000/added_foods", addedFood, {
+      .post("https://food-hub-server-hazel.vercel.app/added_foods", addedFood, {
         withCredentials: true,
       })
       .then(() => {
         // send added food in foods collection
         axios
-          .post("http://localhost:5000/available_foods/add", addedFood, {
-            withCredentials: true,
-          })
+          .post(
+            "https://food-hub-server-hazel.vercel.app/available_foods/add",
+            addedFood,
+            {
+              withCredentials: true,
+            }
+          )
           .then(() => {
             toast.success("Food Added successfully.", { id: toastId });
             form.reset();
@@ -67,6 +72,9 @@ const AddFood = () => {
 
   return (
     <div className="container mx-auto">
+      <Helmet>
+        <title>FoodHub | Add Food</title>
+      </Helmet>
       <Title>Add Food Here</Title>
       <div className="flex items-center justify-center max-sm:px-2">
         <form

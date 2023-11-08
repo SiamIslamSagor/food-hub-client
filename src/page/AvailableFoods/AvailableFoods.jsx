@@ -9,6 +9,7 @@ import { BiBorderAll } from "react-icons/bi";
 import { FiFilter } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import "./AvailableFoods.css";
+import { Helmet } from "react-helmet-async";
 
 const AvailableFoods = () => {
   // foods data
@@ -65,6 +66,9 @@ const AvailableFoods = () => {
 
   return (
     <div className="container mx-auto">
+      <Helmet>
+        <title>FoodHub | Available Food</title>
+      </Helmet>
       <div className="text-center">
         <Title> Available Foods</Title>
       </div>

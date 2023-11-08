@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
       // if user are exist, then execute the code=>
       if (presentUser) {
         axios
-          .post("http://localhost:5000/jwt", loggedInUser, {
+          .post("https://food-hub-server-hazel.vercel.app/jwt", loggedInUser, {
             withCredentials: true,
           })
           .then(res => {
@@ -82,6 +82,18 @@ const AuthProvider = ({ children }) => {
           })
           .catch(err => {
             console.log(err);
+          });
+      } else {
+        axios
+          .post(
+            "https://food-hub-server-hazel.vercel.app/logout",
+            loggedInUser,
+            {
+              withCredentials: true,
+            }
+          )
+          .then(res => {
+            console.log("Log Out::>>", res.data);
           });
       }
     });
